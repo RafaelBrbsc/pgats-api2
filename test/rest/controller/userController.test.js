@@ -104,8 +104,6 @@ describe('User Controller', () => {
                 .post('/login')
                 .send(payload)
 
-            console.log(response)
-
             expect(response.status).to.equal(200)
             expect(response.body).to.equal(token)
         })
