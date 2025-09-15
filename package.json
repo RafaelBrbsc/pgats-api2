@@ -1,0 +1,23 @@
+{
+  "scripts": {
+    "startRest": "node rest/server.js",
+    "startGraphQL": "node graphql/server.js",
+    "testController": "mocha test/rest/controller/*.test.js",
+    "testRest": "mocha test/rest/external/*.test.js --timeout 10000",
+    "testGraphQL": "mocha test/graphql/external/*.test.js --timeout 10000"
+  },
+  "dependencies": {
+    "express": "^5.1.0",
+    "express-graphql": "^0.12.0",
+    "graphql": "^15.10.1",
+    "jsonwebtoken": "^9.0.2",
+    "swagger-ui-express": "^5.0.1"
+  },
+  "devDependencies": {
+    "chai": "^6.0.1",
+    "dotenv": "^17.2.2",
+    "mocha": "^11.7.2",
+    "sinon": "^21.0.0",
+    "supertest": "^7.1.4"
+  }
+}
