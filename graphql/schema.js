@@ -68,9 +68,7 @@ const Mutation = new GraphQLObjectType({
       },
       resolve(parent, args, context) {
         const authHeader = context.req.headers['authorization'];
-        console.log(context.req.headers)
         const token = authHeader && authHeader.split(' ')[1];
-        console.log(token)
         const decoded = userService.verifyToken(token);
         if (decoded.user.username != args.from) {
             throw new Error('Token inválido.')
