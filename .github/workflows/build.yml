@@ -29,7 +29,7 @@ jobs:
       run: npm run startRest &
 
     - name: Subindo a API GraphQL
-      run: npm run startGraphql &
+      run: npm run startGraphQL &
 
     - name: Tempo para subir as APIs
       run: sleep 10
