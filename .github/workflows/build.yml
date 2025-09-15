@@ -1,0 +1,46 @@
+name: Build and Test
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Use Node.js 20.x
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20.x'
+
+    - name: Instalando dependências
+      run: npm install
+
+    - name: Rodando testes de controller da API Rest
+      run: npm run testController
+
+    - name: Subindo a API Rest
+      run: npm run startRest &
+
+    - name: Subindo a API GraphQL
+      run: npm run startGraphql &
+
+    - name: Tempo para subir as APIs
+      run: sleep 10
+
+    - name: Criando variáveis de ambiente
+      run: |
+        echo "URL_REST=${{ secrets.URL_REST }}" >> .env
+        echo "URL_GRAPHQL=${{ secrets.URL_GRAPHQL }}" >> .env
+
+    - name: Rodando testes de API Rest via HTTP
+      run: npm run testRest
+
+    - name: Rodando testes de API GraphQL via HTTP
+      run: npm run testGraphQL
